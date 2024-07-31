@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZFC8aLIkNwvstNeh45MtTlNtBW5p7O8ezaymy5" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+            color: #343a40;
+        }
+        .todo-input {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            border: 2px solid #343a40;
+            border-radius: 5px;
+        }
+        .collection {
+            list-style-type: none;
+            padding: 0;
+        }
+        .collection-item {
+            background-color: #ffffff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .collection-item h5 {
+            margin: 0;
+            display: inline-block;
+            flex-grow: 1;
+        }
+        .secondary-content i {
+            cursor: pointer;
+            margin-left: 10px;
+            color: #6c757d;
+        }
+        .secondary-content i:hover {
+            color: #343a40;
+        }
+        strike {
+            color: #6c757d;
+        }
+    </style>
+
+    <title>TODO LIST</title>
+</head>
+<body>
+    
+
+<div id="app">
+    <div class="container row">
+      <div class="container col s12">
+        <h1>ToDo List</h1>
+      <input v-model='Entrada' placeholder="Novo Item" v-on:keyup.enter="ToDoList.push(Entrada); Entrada=''" type="text">
+      <ul class="collection">
+        <li class="collection-item" v-for="(item,chave) in ToDoList">
+          <div>
+              
+            <h5> {{ item }} 
+              <div class="secondary-content">
+                <i class="material-icons small" v-on:click="Finished.push(ToDoList.splice(chave,1)[0])">Fait</i>
+                <i class="material-icons small" v-on:click="ToDoList.splice(chave,1)">Supprimer</i>
+              </div>
+            </h5>
+          </div>
+        </li>
+      </ul>
+        
+      <ul class="collection">
+        <li class="collection-item" v-for="(item,chave) in Finished">
+          <div>
+            <h5> <strike>{{ item }}</strike> 
+              <div class="secondary-content">
+                <i class="material-icons small" v-on:click="ToDoList.push(Finished.splice(chave,1)[0])">replay</i>   
+                <i class="material-icons small" v-on:click="Finished.splice(chave,1)">Supprimer</i>
+              </div>
+            </h5>
+          </div>
+        </li>
+      </ul>
+        
+      <!-- <input type="checkbox" class="filled-in" checked="checked" /> -->
+        
+    </div>
+    </div>
+    <script >
+var app = new Vue({
+    el:'#app',
+    data:{
+      ToDoList:["teste","teste2"],
+      Finished:[],
+      Entrada:''
+    },
+    methods:{
+      
+    }})
+
+    </script>
+    </body>
+</html>
